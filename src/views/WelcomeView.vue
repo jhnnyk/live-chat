@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <div class="welcome container">
     <p>Welcome</p>
