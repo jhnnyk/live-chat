@@ -1,7 +1,9 @@
 <script setup>
 import useLogout from '@/composables/useLogout'
+import getUser from '@/composables/getUser'
 
 const { error, logout } = useLogout()
+const { user } = getUser()
 
 const handleClick = async () => {
   await logout()
@@ -12,10 +14,10 @@ const handleClick = async () => {
 </script>
 
 <template>
-  <nav>
+  <nav v-if="user">
     <div>
-      <p>Hey there ... [ displayName here ]</p>
-      <p class="email">Currently logged in as ... [ email here ]</p>
+      <p>Hey there {{ user.displayName }}</p>
+      <p class="email">Currently logged in as {{ user.email }}</p>
     </div>
     <button @click="handleClick">Logout</button>
   </nav>
