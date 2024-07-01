@@ -5,13 +5,13 @@ const { error, signup } = useSignup()
 const displayName = defineModel('displayName')
 const email = defineModel('email')
 const password = defineModel('password')
+const emit = defineEmits(['signup'])
 
 const handleSubmit = async () => {
   await signup(email.value, password.value, displayName.value)
-  if (error) {
-    console.log(error)
+  if (!error.value) {
+    emit('signup')
   }
-  console.log('user signed up')
 }
 </script>
 

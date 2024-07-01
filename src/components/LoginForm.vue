@@ -3,13 +3,14 @@ import useLogin from '@/composables/useLogin'
 
 const email = defineModel('email')
 const password = defineModel('password')
+const emit = defineEmits(['login'])
 
 const { error, login } = useLogin()
 
 const handleSubmit = async () => {
   await login(email.value, password.value)
   if (!error.value) {
-    console.log('user logged in')
+    emit('login')
   }
 }
 </script>
