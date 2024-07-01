@@ -1,5 +1,9 @@
-<script setup></script>
+<script setup>
+import NavBar from '../components/NavBar.vue'
+</script>
 
 <template>
-  <p>Chatroom</p>
+  <div class="container">
+    <NavBar />
+  </div>
 </template>
