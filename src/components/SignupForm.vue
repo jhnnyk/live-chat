@@ -1,10 +1,17 @@
 <script setup>
+import useSignup from '@/composables/useSignup'
+
+const { error, signup } = useSignup()
 const displayName = defineModel('displayName')
 const email = defineModel('email')
 const password = defineModel('password')
 
-const handleSubmit = () => {
-  console.log(displayName.value, email.value, password.value)
+const handleSubmit = async () => {
+  await signup(email.value, password.value, displayName.value)
+  if (error) {
+    console.log(error)
+  }
+  console.log('user signed up')
 }
 </script>
 
