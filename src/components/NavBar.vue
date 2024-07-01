@@ -1,4 +1,15 @@
-<script setup></script>
+<script setup>
+import useLogout from '@/composables/useLogout'
+
+const { error, logout } = useLogout()
+
+const handleClick = async () => {
+  await logout()
+  if (!error.value) {
+    console.log('user logged out')
+  }
+}
+</script>
 
 <template>
   <nav>
@@ -6,7 +17,7 @@
       <p>Hey there ... [ displayName here ]</p>
       <p class="email">Currently logged in as ... [ email here ]</p>
     </div>
-    <button>Logout</button>
+    <button @click="handleClick">Logout</button>
   </nav>
 </template>
 
