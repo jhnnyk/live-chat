@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { projectFirestore } from '@/firebase/config'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
@@ -25,6 +25,11 @@ const getCollection = (collectionName) => {
       error.value = 'could not fetch data'
     }
   )
+
+  watchEffect((onInvalidate) => {
+    // unsub from prev collection when watcher is stopped (component unmounted)
+    onInvalidate(() => unsub())
+  })
 
   return { error, documents }
 }
