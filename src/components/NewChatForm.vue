@@ -1,9 +1,11 @@
 <script setup>
 import getUser from '@/composables/getUser'
+import useCollection from '@/composables/useCollection'
 import { timestamp } from '@/firebase/config'
 
 const message = defineModel('message')
 const { user } = getUser()
+const { addItemtoDB, error } = useCollection('messages')
 
 const handleSubmit = async () => {
   const chat = {
@@ -12,8 +14,10 @@ const handleSubmit = async () => {
     createdAt: timestamp
   }
 
-  console.log(chat)
-  message.value = ''
+  await addItemtoDB(chat)
+  if (!error.value) {
+    message.value = ''
+  }
 }
 </script>
 
@@ -24,6 +28,7 @@ const handleSubmit = async () => {
       v-model="message"
       @keypress.enter.prevent="handleSubmit"
     ></textarea>
+    <div class="error">{{ error }}</div>
   </form>
 </template>
 
