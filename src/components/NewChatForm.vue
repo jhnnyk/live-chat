@@ -46,5 +46,6 @@ textarea {
   border-radius: 20px;
   font-family: inherit;
   outline: none;
+  padding-left: 5px;
 }
 </style>
